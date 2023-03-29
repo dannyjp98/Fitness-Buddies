@@ -1,1 +1,8 @@
 # eecs493-proj
+In this group milestone you will crate a mockup of your web app UI. To ensure that you are making progress on your project, we ask you to create this mockup using HTML and CSS (no JavaScript at this stage). You need to create individual web pages that showcase the blueprint for your web application. You will showcase the functionality of your prototype using Wizard-of-Oz (i.e., you will be the one showing how the web pages update based on what the user is doing).
+
+Remember that prototypes only implement slices of functionality. You do not have to prototype all pages in your web app at this stage. Instead, you need to think about the user scenario from your storyboard, and mockup just enough pages to show/demo how the user would use your web app in that scenario.
+
+In order to complete this milestone, you should start working on it as soon as you can. We recommend starting on coding immediately after making design changes based on the storyboard critique feedback. Your low-fidelity prototype code should be submitted by 3/29 at 5PM, but you can feel free to update this until the lecture and the in-class activity the next day. Just make sure your prototype is ready for the heuristic evaluation.
+
+Additionally, we will dedicate discussions the week after, where you will go to a discussion section and get feedback from the IAs about your intermediate prototype. You will be graded based on what works.
