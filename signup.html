@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-x: hidden;">
+    <head>
+        <title id="title">Fitness Buddies</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css" integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js" integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" type="text/css" href="css/base.css">
+        <link rel="stylesheet" type="text/css" href="css/signup.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md">
+            <div class="header">
+                <a class="navbar-brand" href="index.html">Fitness Buddies</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="signup.html">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="main d-flex justify-content-center" id="main">
+            <br>
+            <div class="container">
+              <form action="home.html">
+                <div class="form-group">
+                  <label for="nameInput">Name</label>
+                  <input type="text" class="form-control" id="nameInput" placeholder="Enter name">
+                </div>
+                <br>
+                <div class="form-group">
+                  <label for="emailInput">Password</label>
+                  <input type="email" class="form-control" id="emailInput" placeholder="Enter email">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="phoneInput">Phone Number</label>
+                    <input type="number" class="form-control" id="phoneInput" placeholder="Enter phone number">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="cityInput">City</label>
+                    <input type="text" class="form-control" id="cityInput" placeholder="Enter city">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="passwordInput">Password</label>
+                    <input type="password" class="form-control" id="passwordInput" placeholder="Enter password">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="profilePicInput">Profile Picture</label>
+                    <input type="file" class="form-control" id="profilePicInput" placeholder="Profile Picture">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="bioInput">Short Bio</label >
+                    <input type="text" class="form-control" id="bioInput" placeholder="Enter a short bio">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="interestInput">Select Top 3 Interests</label>
+                    <select name="interestInput" id="interestInput">
+                        <option>Soccer</option>
+                        <option>Basketball</option>
+                        <option>Football</option>
+                        <option>Baseball</option>
+                        <option>Running</option>
+                        <option>Gym</option>
+                        <option>Weightlifting</option>
+                        <option>Swimming</option>
+                        <option>Cricket</option>
+                        <option>Martial Arts</option>
+                    </select>
+                </div>
+                <br>
+                <div class="form-group" id="experience">
+
+                </div>
+                <button class="btn btn-primary">Sign Up!</button>
+              </form>
+            </div>
+        </div>
+    </body>
+    <script>
+        var eventHandler = function(name) {
+            if(name === 'onItemAdd' )
+                return function() {
+                    console.log(name, arguments)
+                    $("#experience").append(
+                        `
+                            <div id="${arguments[0]}ExpDiv">
+                                <label for=${arguments[0]}Exp> ${arguments[0]} Experience Level (1-10)</label>
+                                <input type="number" min="1" max="10" id="${arguments[0]}Exp">
+                                <br>
+                            </div>
+                        `
+                    )
+                };
+            if(name === 'onItemRemove')
+                return function() {
+                    console.log(name, arguments)
+                    $(`#${arguments[0]}ExpDiv`).remove();
+                }
+        };
+        var $select = $('#interestInput').selectize({
+            plugins         : ['remove_button'],
+            create          : true,
+            maxItems        : 3,
+            items           : null,
+            onItemAdd       : eventHandler('onItemAdd'),
+            onItemRemove    : eventHandler('onItemRemove'),
+        });
+    </script>
+</html>
