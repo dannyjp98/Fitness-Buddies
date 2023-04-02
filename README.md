@@ -1,8 +1,46 @@
-# eecs493-proj
-In this group milestone you will crate a mockup of your web app UI. To ensure that you are making progress on your project, we ask you to create this mockup using HTML and CSS (no JavaScript at this stage). You need to create individual web pages that showcase the blueprint for your web application. You will showcase the functionality of your prototype using Wizard-of-Oz (i.e., you will be the one showing how the web pages update based on what the user is doing).
+# fitnessbuddies
 
-Remember that prototypes only implement slices of functionality. You do not have to prototype all pages in your web app at this stage. Instead, you need to think about the user scenario from your storyboard, and mockup just enough pages to show/demo how the user would use your web app in that scenario.
+This template should help get you started developing with Vue 3 in Vite.
 
-In order to complete this milestone, you should start working on it as soon as you can. We recommend starting on coding immediately after making design changes based on the storyboard critique feedback. Your low-fidelity prototype code should be submitted by 3/29 at 5PM, but you can feel free to update this until the lecture and the in-class activity the next day. Just make sure your prototype is ready for the heuristic evaluation.
+## Recommended IDE Setup
 
-Additionally, we will dedicate discussions the week after, where you will go to a discussion section and get feedback from the IAs about your intermediate prototype. You will be graded based on what works.
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+
+## Type Support for `.vue` Imports in TS
+
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+
+If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+
+1. Disable the built-in TypeScript Extension
+    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
+    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
+2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+
+## Customize configuration
+
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Type-Check, Compile and Minify for Production
+
+```sh
+npm run build
+```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+npm run lint
+```
