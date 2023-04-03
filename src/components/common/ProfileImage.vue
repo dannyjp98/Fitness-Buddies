@@ -3,18 +3,20 @@
 </template>
 
 <script>
-import { getDownloadURL, ref } from 'firebase/storage'
+import { getDownloadURL, ref } from "firebase/storage";
 
-import { storage } from '@/firebase'
+import { storage } from "@/firebase";
 
 export default {
-  name: 'ProfileImage',
+  name: "ProfileImage",
   async setup(props) {
-    const picURL = await getDownloadURL(ref(storage, `users/${props.uid}/profile`))
-    return { picURL }
+    const picURL = await getDownloadURL(
+      ref(storage, `users/${props.uid}/profile`)
+    );
+    return { picURL };
   },
   props: {
-    uid: String
-  }
-}
+    uid: String,
+  },
+};
 </script>

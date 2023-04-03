@@ -1,19 +1,19 @@
 <script>
-import { useStore } from 'vuex'
-import { computed } from 'vue'
-import { auth } from '@/firebase'
+import { useStore } from "vuex";
+import { computed } from "vue";
+import { auth } from "@/firebase";
 
 export default {
-  name: 'NavBar',
+  name: "NavBar",
   setup() {
-    const store = useStore()
+    const store = useStore();
     auth.onAuthStateChanged((user) => {
-      store.dispatch('fetchUser', user)
-    })
-    const user = computed(() => store.getters.user)
-    return { user }
-  }
-}
+      store.dispatch("fetchUser", user);
+    });
+    const user = computed(() => store.getters.user);
+    return { user };
+  },
+};
 </script>
 <template>
   <nav class="navbar navbar-expand-lg">

@@ -3,16 +3,16 @@
 </template>
 
 <script>
-import { getAuth } from 'firebase/auth'
-const auth = getAuth()
+import { getAuth } from "firebase/auth";
+const auth = getAuth();
 export default {
-  name: 'HomeView',
+  name: "HomeView",
   data() {
     return {
-      user: auth.currentUser
-    }
-  }
-}
+      user: auth.currentUser,
+    };
+  },
+};
 </script>
 
 <style scoped></style>

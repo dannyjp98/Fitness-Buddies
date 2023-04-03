@@ -1,17 +1,20 @@
 <script setup>
-import { ref } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
+import { ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
-const store = useStore()
-const router = useRouter()
+const store = useStore();
+const router = useRouter();
 
-const email = ref('')
-const password = ref('')
+const email = ref("");
+const password = ref("");
 const login = async () => {
-  await store.dispatch('login', { email: email.value, password: password.value })
-  await router.push('/home')
-}
+  await store.dispatch("login", {
+    email: email.value,
+    password: password.value,
+  });
+  await router.push("/home");
+};
 </script>
 <template>
   <div class="container">
@@ -29,7 +32,12 @@ const login = async () => {
       <br />
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" placeholder="Password" v-model="password" />
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Password"
+          v-model="password"
+        />
       </div>
       <br />
       <button class="btn btn-primary">Submit</button>

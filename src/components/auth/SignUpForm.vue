@@ -1,69 +1,72 @@
 <script setup>
-import { ref } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
-import { doc, setDoc } from 'firebase/firestore'
-import { getStorage, ref as storageRef, uploadBytes } from 'firebase/storage'
+import { ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { doc, setDoc } from "firebase/firestore";
+import { getStorage, ref as storageRef, uploadBytes } from "firebase/storage";
 
-import { interestsList } from '../models/interests'
-import { db } from '@/firebase'
+import { interestsList } from "../models/interests";
+import { db } from "@/firebase";
 
-const router = useRouter()
+const router = useRouter();
 
-let levels = {}
-interestsList.map((interest) => (levels[interest] = 0))
+let levels = {};
+interestsList.map((interest) => (levels[interest] = 0));
 
-const selected = ref([])
-const interests = ref(interestsList)
-const email = ref('')
-const password = ref('')
-const name = ref('')
-const phone = ref('')
-const city = ref('')
-const bio = ref('')
-const experiences = ref(levels)
+const selected = ref([]);
+const interests = ref(interestsList);
+const email = ref("");
+const password = ref("");
+const name = ref("");
+const phone = ref("");
+const city = ref("");
+const bio = ref("");
+const experiences = ref(levels);
 
-const store = useStore()
-const storage = getStorage()
+const store = useStore();
+const storage = getStorage();
 
-let profilePic
+let profilePic;
 
 const register = async () => {
-  let selectedInterests = []
+  let selectedInterests = [];
   for (let i in selected.value) {
     selectedInterests.push({
       interest: selected.value[i],
-      experience: parseInt(experiences.value[selected.value[i]])
-    })
+      experience: parseInt(experiences.value[selected.value[i]]),
+    });
   }
 
-  await store.dispatch('register', { email: email.value, password: password.value })
-  const user = store.getters.user.data
+  await store.dispatch("register", {
+    email: email.value,
+    password: password.value,
+  });
+  const user = store.getters.user.data;
 
-  const sRef = storageRef(storage, `users/${user.uid}/profile`)
+  const sRef = storageRef(storage, `users/${user.uid}/profile`);
 
-  setDoc(doc(db, 'users', user.uid), {
+  setDoc(doc(db, "users", user.uid), {
     name: name.value,
     phone: phone.value,
     city: city.value,
     bio: bio.value,
-    interests: selectedInterests
-  })
-  uploadBytes(sRef, profilePic)
-  router.push('/home')
-}
+    interests: selectedInterests,
+  });
+  uploadBytes(sRef, profilePic);
+  router.push("/home");
+};
 
-const onUpload = (event) => (profilePic = event.target.files[0])
+const onUpload = (event) => (profilePic = event.target.files[0]);
 </script>
 <script>
-import 'vue-select/dist/vue-select.css'
-import vSelect from 'vue-select'
+import "vue-select/dist/vue-select.css";
+import vSelect from "vue-select";
 export default {
-  name: 'SignUpForm',
+  name: "SignUpForm",
   components: {
-    vSelect: vSelect
-  }
-}
+    vSelect: vSelect,
+  },
+};
 </script>
 
 <template>
@@ -175,7 +178,13 @@ export default {
                 <label>{{ interest }} Experience Level (1-10): </label>
               </div>
               <div class="col">
-                <input type="range" min="1" max="10" required v-model="experiences[interest]" />
+                <input
+                  type="range"
+                  min="1"
+                  max="10"
+                  required
+                  v-model="experiences[interest]"
+                />
               </div>
               <div class="col">
                 <p>{{ experiences[interest] }}</p>

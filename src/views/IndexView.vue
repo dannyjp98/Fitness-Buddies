@@ -1,23 +1,23 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
+import { computed, onMounted, ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
-import { auth } from '@/firebase'
-import LoginForm from '@/components/auth/LoginForm.vue'
-import SignUpForm from '@/components/auth/SignUpForm.vue'
+import { auth } from "@/firebase";
+import LoginForm from "@/components/auth/LoginForm.vue";
+import SignUpForm from "@/components/auth/SignUpForm.vue";
 
-const login = ref(true)
-const router = useRouter()
-const store = useStore()
+const login = ref(true);
+const router = useRouter();
+const store = useStore();
 
-const user = computed(() => store.getters.user).value
+const user = computed(() => store.getters.user).value;
 auth.onAuthStateChanged(async (u) => {
-  store.dispatch('fetchUser', u)
+  store.dispatch("fetchUser", u);
   if (user.loggedIn) {
-    await router.push('/home')
+    await router.push("/home");
   }
-})
+});
 </script>
 
 <template>
@@ -37,13 +37,15 @@ auth.onAuthStateChanged(async (u) => {
             <LoginForm />
             <br />
             <p style="padding: 0% 1%">
-              Dont have an account? Sign up <strong @click="login = false">here.</strong>
+              Dont have an account? Sign up
+              <strong @click="login = false">here.</strong>
             </p>
           </div>
           <div v-else>
             <SignUpForm />
             <p style="padding: 0% 7%">
-              Already have an account? Log in <strong @click="login = true">here.</strong>
+              Already have an account? Log in
+              <strong @click="login = true">here.</strong>
             </p>
           </div>
         </div>
@@ -77,7 +79,7 @@ auth.onAuthStateChanged(async (u) => {
 
 pre,
 code {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   font-size: 16px;
   color: #805229;
 }
@@ -88,13 +90,13 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   display: block;
   font-weight: bold;
 }
 
 input {
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   font-size: 16px;
   color: #805229;
   border: #a06633 2px solid;
