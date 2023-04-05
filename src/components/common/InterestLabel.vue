@@ -1,15 +1,13 @@
 <template>
   <tippy class="tag" placement="bottom">
     {{ interest }}
-    <template #content>
-      {{ this.experience }}/10
-    </template>
+    <template #content> {{ this.experience }}/10 </template>
   </tippy>
 </template>
 
-<script >
+<script>
 import { Tippy } from "vue-tippy";
-import 'tippy.js/dist/tippy.css'
+import "tippy.js/dist/tippy.css";
 
 export default {
   name: "InterestLabel",
@@ -17,7 +15,7 @@ export default {
     interest: String,
     experience: Number,
   },
-  components: {Tippy},
+  components: { Tippy },
 };
 </script>
 

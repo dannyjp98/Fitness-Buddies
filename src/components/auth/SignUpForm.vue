@@ -5,7 +5,7 @@ import { useRouter } from "vue-router";
 import { doc, setDoc } from "firebase/firestore";
 import { getStorage, ref as storageRef, uploadBytes } from "firebase/storage";
 
-import { interestsList } from "../models/interests";
+import { interestsList } from "@/models/interests";
 import { db } from "@/firebase";
 
 const router = useRouter();

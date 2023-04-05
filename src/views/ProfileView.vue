@@ -137,7 +137,12 @@ export default {
               </div>
               <div class="col align-items-center d-flex flex-column" v-else>
                 <h3>Bio</h3>
-                <textarea class="form-control" type="text" v-model="newBio" rows="2"></textarea>
+                <textarea
+                  class="form-control"
+                  type="text"
+                  v-model="newBio"
+                  rows="2"
+                ></textarea>
                 <br />
               </div>
             </div>
@@ -236,7 +241,7 @@ img {
   display: block;
   margin: auto;
 }
-.form-control{
+.form-control {
   text-align: center;
   border-color: #007bff;
   width: 75%;
