@@ -1,6 +1,7 @@
 # fitnessbuddies
 
-This template should help get you started developing with Vue 3 in Vite.
+## Project Description
+fitnessbuddies is a web application built on Vue.JS and Vite. The project utilizes mutliple open-source libraries and everything is detailed in the package.json file. Specifically, this project relies on the Firestore, Authentication, Storage, and hosting features from Firebase. In addition, this project uses bootstrap+popperjs, vue-tippy, and vue-select to build the UI. Finally, this project uses vue-router and vuex to manage application routes and application state. 
 
 ## Recommended IDE Setup
 
