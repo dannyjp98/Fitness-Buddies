@@ -37,10 +37,16 @@ const register = async () => {
     });
   }
 
+  try {
   await store.dispatch("register", {
     email: email.value,
     password: password.value,
   });
+  }
+  catch (error) {
+    alert("Password must be at least 6 characters");
+  }
+
   const user = store.getters.user.data;
 
   const sRef = storageRef(storage, `users/${user.uid}/profile`);
@@ -160,7 +166,7 @@ export default {
         </div>
         <br />
         <div class="form-group">
-          <label for="interestInput">Select Top 3 Interests</label>
+          <label for="interestInput">Select Up To 3 Interests</label>
           <v-select
             v-model="selected"
             multiple
