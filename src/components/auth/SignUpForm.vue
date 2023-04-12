@@ -209,6 +209,10 @@ export default {
             </div>
           </div>
         </div>
+        <div>
+          *Level 1 is an absolute beginner, Level 10 is a professional
+        </div>
+        <br />
         <button class="btn btn-primary">Sign Up!</button>
       </form>
     </div>

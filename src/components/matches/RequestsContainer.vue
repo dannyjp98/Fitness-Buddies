@@ -1,7 +1,7 @@
 <template>
   <div v-if="!isLoading">
     <h2>
-      Fitness Buddy Matches: <strong>{{ requests.length }}</strong>
+      Pending Fitness Buddy Requests: <strong>{{ requests.length }}</strong>
     </h2>
     <div class="requestsContainer">
       <div class="container requests" v-for="match in requests">
