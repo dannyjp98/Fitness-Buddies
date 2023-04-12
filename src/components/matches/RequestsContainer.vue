@@ -39,7 +39,7 @@ export default {
       requests.value = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
-        const uid = doc.ref.path.split('/')[1];
+        const uid = doc.ref.path.split("/")[1];
         if (
           user.uid !== uid && // not me
           userData.requests.includes(uid) && // They have requested me

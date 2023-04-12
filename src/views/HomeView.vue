@@ -34,7 +34,7 @@ export default {
     </div>
     <div class="col">
       <Suspense>
-      <RequestsContainer />
+        <RequestsContainer />
       </Suspense>
     </div>
   </div>

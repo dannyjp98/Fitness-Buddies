@@ -18,7 +18,7 @@
 import { db } from "@/firebase";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
-import { onSnapshot, collection, getDoc, doc} from "firebase/firestore";
+import { onSnapshot, collection, getDoc, doc } from "firebase/firestore";
 import Match from "@/components/matches/Match.vue";
 
 export default {
@@ -39,7 +39,7 @@ export default {
       matches.value = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
-        const uid = doc.ref.path.split('/')[1];
+        const uid = doc.ref.path.split("/")[1];
         if (
           user.uid !== uid && // not me
           !data.requests.includes(user.uid) && // I have not requested them
