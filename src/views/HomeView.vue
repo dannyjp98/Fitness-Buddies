@@ -1,9 +1,10 @@
 <script>
 import MatchesContainer from "@/components/matches/MatchesContainer.vue";
+import RequestsContainer from "@/components/matches/RequestsContainer.vue";
 
 export default {
   name: "HomeView",
-  components: { MatchesContainer },
+  components: { MatchesContainer, RequestsContainer },
 };
 </script>
 
@@ -30,7 +31,7 @@ export default {
       </div>
     </div>
     <div class="col">
-      <h2>Requests: 2</h2>
+      <RequestsContainer />
     </div>
   </div>
 </template>

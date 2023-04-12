@@ -57,6 +57,8 @@ const register = async () => {
       city: city.value,
       bio: bio.value,
       interests: selectedInterests,
+      resolved: [],
+      requests: [],
     }),
     uploadBytes(sRef, profilePic),
     router.push("/home"),

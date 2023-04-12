@@ -1,11 +1,11 @@
 <template>
   <div v-if="!isLoading">
     <h2>
-      Fitness Buddy Matches: <strong>{{ matches.length }}</strong>
+      Fitness Buddy Matches: <strong>{{ requests.length }}</strong>
     </h2>
-    <div class="matchContainer">
-      <div class="container match" v-for="match in matches">
-        <Match :match="match" :is-request="false" />
+    <div class="requestsContainer">
+      <div class="container requests" v-for="match in requests">
+        <Match :match="match" :is-request="true" />
       </div>
     </div>
   </div>
@@ -22,25 +22,25 @@ import { onSnapshot, collection } from "firebase/firestore";
 import Match from "@/components/matches/Match.vue";
 
 export default {
-  name: "MatchesContainer",
+  name: "RequestsContainer",
   components: { Match },
   setup() {
     const store = useStore();
-    const matches = ref([]);
+    const requests = ref([]);
     const isLoading = ref(true);
 
     const user = computed(() => store.getters.user).value.data;
 
     const q = collection(db, "users");
     onSnapshot(q, (querySnapshot) => {
-      matches.value = [];
+      requests.value = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
         if (
-          !data.requests.includes(user.uid) &&
+          data.requests.includes(user.uid) &&
           !data.resolved.includes(user.uid)
         ) {
-          matches.value.push({
+          requests.value.push({
             name: data.name,
             uid: doc.ref.path.split("/")[1],
             city: data.city,
@@ -52,7 +52,7 @@ export default {
       });
     });
 
-    return { user, matches, isLoading };
+    return { user, requests, isLoading };
   },
 };
 </script>
@@ -61,10 +61,12 @@ export default {
 h2 {
   color: #007bff;
 }
-.match {
+
+.requests {
   padding: 0;
 }
-.matchContainer {
+
+.requestsContainer {
   overflow: scroll !important;
   height: 95vh;
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="row-md-2 match">
-    <div class="container overflow-hidden">
+    <div class="container">
       <div class="row d-flex">
         <div class="col">
           <Suspense>

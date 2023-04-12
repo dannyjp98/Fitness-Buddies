@@ -7,8 +7,9 @@
   font-weight: normal;
 }
 
+html,
 body {
-  min-height: 100vh;
+  height: 100%;
   transition: color 0.5s, background-color 0.5s;
   font-size: 15px;
   text-rendering: optimizeLegibility;
@@ -21,9 +22,14 @@ body {
   margin: 0;
   padding: 0;
   line-height: inherit;
+  overflow: auto;
 }
 
 main {
   color: #007bff;
   padding: 2% 5%;
+}
+
+#app {
+  height: 100vh;
 }
