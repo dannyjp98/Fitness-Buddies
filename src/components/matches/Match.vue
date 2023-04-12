@@ -13,7 +13,7 @@
       </div>
       <div class="row justify-content-center">{{ match.bio }}</div>
       <div class="row justify-content-center">
-        {{ match.city }}
+        {{ match.phone }}
       </div>
       <br />
       <div
@@ -27,14 +27,18 @@
         />
       </div>
       <div class="row justify-content-center" v-if="!isRequest">
-        <a href="">Connect</a>
+        <button class="btn" @click="connect(match.uid)">Connect</button>
       </div>
       <div class="row justify-content-center" v-else>
         <div class="col">
-          <button class="btn btn-success">Accept</button>
+          <button class="btn btn-success" @click="resolve(match.uid)">
+            Accept
+          </button>
         </div>
         <div class="col">
-          <button class="btn btn-danger">Reject</button>
+          <button class="btn btn-danger" @click="resolve(match.uid)">
+            Reject
+          </button>
         </div>
       </div>
     </div>
@@ -42,6 +46,8 @@
 </template>
 
 <script>
+import { db } from "@/firebase";
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import InterestLabel from "@/components/common/InterestLabel.vue";
 import ProfileImage from "@/components/common/ProfileImage.vue";
 
@@ -49,14 +55,29 @@ export default {
   name: "Match",
   components: { ProfileImage, InterestLabel },
   props: {
+    uid: String,
     match: {
       name: String,
       uid: String,
       bio: String,
       city: String,
+      phone: Number,
       interests: [Object],
     },
     isRequest: Boolean,
+  },
+  methods: {
+    async connect(ruid) {
+      await updateDoc(doc(db, "users", ruid), {
+        requests: arrayUnion(this.uid),
+      });
+    },
+    async resolve(ruid) {
+      await updateDoc(doc(db, "users", ruid), {
+        requests: arrayRemove(this.uid),
+        resolved: arrayUnion(this.uid),
+      });
+    },
   },
 };
 </script>

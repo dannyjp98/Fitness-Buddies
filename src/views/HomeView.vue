@@ -15,7 +15,7 @@ export default {
       <MatchesContainer />
     </div>
     <div class="col">
-      <div style="width: 100%">
+      <div style="width: 100%; margin-top: 45px">
         <iframe
           width="100%"
           height="600"

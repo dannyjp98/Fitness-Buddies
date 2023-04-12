@@ -5,7 +5,7 @@
     </h2>
     <div class="matchContainer">
       <div class="container match" v-for="match in matches">
-        <Match :match="match" :is-request="false" />
+        <Match :uid="user.uid" :match="match" :is-request="false" />
       </div>
     </div>
   </div>
@@ -45,6 +45,7 @@ export default {
             uid: doc.ref.path.split("/")[1],
             city: data.city,
             bio: data.bio,
+            phone: data.phone,
             interests: data.interests,
           });
         }
