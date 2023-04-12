@@ -8,10 +8,11 @@ import { ref as storageRef, deleteObject } from "firebase/storage";
 import { deleteUser } from "firebase/auth";
 import ProfileImage from "@/components/common/ProfileImage.vue";
 import InterestLabel from "@/components/common/InterestLabel.vue";
+import { Tippy } from "vue-tippy";
 
 export default {
   name: "ProfileVue",
-  components: { InterestLabel, ProfileImage },
+  components: { Tippy, InterestLabel, ProfileImage },
   setup() {
     const store = useStore();
     const router = useRouter();
@@ -32,7 +33,7 @@ export default {
 
     const userRef = doc(db, "users", user.uid);
 
-    onSnapshot(doc(db, "users", user.uid), (doc) => {
+    onSnapshot(userRef, (doc) => {
       state.profile = doc.data();
       newName.value = state.profile.name;
       newPhone.value = state.profile.phone;
@@ -156,7 +157,19 @@ export default {
               </div>
               <div class="col align-items-center d-flex flex-column" v-else>
                 <h3>Location</h3>
-                <input class="form-control" type="text" v-model="newCity" />
+                <tippy placement="bottom" style="margin: 0; width: 100%">
+                  <input
+                    class="form-control"
+                    type="text"
+                    v-model="newCity"
+                    style="margin-left: 70px"
+                    disabled
+                  />
+                  <template #content>
+                    Fitness Buddies is only available in Ann Arbor, MI at this
+                    time
+                  </template>
+                </tippy>
                 <br />
               </div>
             </div>
@@ -183,7 +196,7 @@ export default {
                   <div class="col">
                     <input
                       type="range"
-                      min="0"
+                      min="1"
                       max="10"
                       oninput="this.parentElement.nextSibling.firstChild.textContent = this.value"
                       v-model="newExp[interest.interest]"

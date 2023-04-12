@@ -5,6 +5,8 @@ import store from "./store";
 
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "tippy.js/dist/tippy.css";
+import "vue-select/dist/vue-select.css";
 
 import "./assets/base.css";
 

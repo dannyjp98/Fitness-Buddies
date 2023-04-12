@@ -1,54 +1,38 @@
-
-
-<template>
-  <main>Logged in as {{ user.email }}</main>
-  <div>Found {{ data.length }} Results!</div>
-  <div class="row" v-for="profile in data">
-    <ResultEntry 
-    :city="profile.city" 
-    :bio="profile.bio" 
-    :name="profile.name"
-    :interests="profile.interests"
-    :uid="profile.uid">
-  </ResultEntry>
-  </div>
-</template>
-
 <script>
-import { getAuth } from "firebase/auth";
-import ResultEntry from "@/components/common/ResultEntry.vue";
-import { db } from "@/firebase";
-import { collection, getDocs, query, where } from "@firebase/firestore";
-import { reactive } from "vue";
-
-const auth = getAuth();
-const usersRef = collection(db, "users");
-
-const data = reactive([]);
-
-try{
-  const q = query(collection(db, "users"), where("city", "==", "Ann Arbor"));
-  const snapshot = await getDocs(q);
-  snapshot.forEach(doc => {
-  data.push(doc.data());
-})
-} catch (error) {
-    console.log(error);
-}
+import MatchesContainer from "@/components/matches/MatchesContainer.vue";
 
 export default {
-    name: "HomeView",
-    setup(){
-      return { data };
-    },
-    data() {
-        return {
-            user: auth.currentUser,
-        };
-    },
-    components: { ResultEntry }
-
+  name: "HomeView",
+  components: { MatchesContainer },
 };
 </script>
+
+<template>
+  <br />
+  <div class="row">
+    <div class="col">
+      <MatchesContainer />
+    </div>
+    <div class="col">
+      <div style="width: 100%">
+        <iframe
+          width="100%"
+          height="600"
+          frameborder="0"
+          scrolling="no"
+          marginheight="0"
+          marginwidth="0"
+          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=306%20S%20State%20St.%20Ann%20Arbor%20MI+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+          ><a href="https://www.maps.ie/distance-area-calculator.html"
+            >measure area map</a
+          ></iframe
+        >
+      </div>
+    </div>
+    <div class="col">
+      <h2>Requests: 2</h2>
+    </div>
+  </div>
+</template>
 
 <style scoped></style>

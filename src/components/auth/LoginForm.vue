@@ -10,17 +10,16 @@ const email = ref("");
 const password = ref("");
 
 const login = async () => {
-  try{ 
-  await store.dispatch("login", {
-    email: email.value,
-    password: password.value,
-  });
+  try {
+    await store.dispatch("login", {
+      email: email.value,
+      password: password.value,
+    });
   } catch (error) {
     alert("Invalid Login");
   }
   await router.push("/home");
-}
-
+};
 </script>
 <template>
   <div class="container">

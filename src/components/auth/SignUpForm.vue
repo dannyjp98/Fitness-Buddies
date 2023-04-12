@@ -19,7 +19,7 @@ const email = ref("");
 const password = ref("");
 const name = ref("");
 const phone = ref("");
-const city = ref("");
+const city = ref("Ann Arbor, MI");
 const bio = ref("");
 const experiences = ref(levels);
 
@@ -38,12 +38,11 @@ const register = async () => {
   }
 
   try {
-  await store.dispatch("register", {
-    email: email.value,
-    password: password.value,
-  });
-  }
-  catch (error) {
+    await store.dispatch("register", {
+      email: email.value,
+      password: password.value,
+    });
+  } catch (error) {
     alert("Password must be at least 6 characters");
   }
 
@@ -51,26 +50,29 @@ const register = async () => {
 
   const sRef = storageRef(storage, `users/${user.uid}/profile`);
 
-  setDoc(doc(db, "users", user.uid), {
-    name: name.value,
-    phone: phone.value,
-    city: city.value,
-    bio: bio.value,
-    interests: selectedInterests,
-  });
-  uploadBytes(sRef, profilePic);
-  router.push("/home");
+  await Promise.all([
+    setDoc(doc(db, "users", user.uid), {
+      name: name.value,
+      phone: phone.value,
+      city: city.value,
+      bio: bio.value,
+      interests: selectedInterests,
+    }),
+    uploadBytes(sRef, profilePic),
+    router.push("/home"),
+  ]);
 };
 
 const onUpload = (event) => (profilePic = event.target.files[0]);
 </script>
 <script>
-import "vue-select/dist/vue-select.css";
 import vSelect from "vue-select";
+import { Tippy } from "vue-tippy";
 export default {
   name: "SignUpForm",
   components: {
     vSelect: vSelect,
+    Tippy,
   },
 };
 </script>
@@ -105,6 +107,18 @@ export default {
         </div>
         <br />
         <div class="form-group">
+          <label for="passwordInput">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="passwordInput"
+            placeholder="Enter password"
+            v-model="password"
+            required
+          />
+        </div>
+        <br />
+        <div class="form-group">
           <label for="phoneInput">Phone Number</label>
           <input
             type="number"
@@ -116,29 +130,22 @@ export default {
           />
         </div>
         <br />
-        <div class="form-group">
-          <label for="cityInput">City</label>
-          <input
-            type="text"
-            class="form-control"
-            id="cityInput"
-            placeholder="Enter city"
-            v-model="city"
-            required
-          />
-        </div>
-        <br />
-        <div class="form-group">
-          <label for="passwordInput">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="passwordInput"
-            placeholder="Enter password"
-            v-model="password"
-            required
-          />
-        </div>
+        <tippy placement="bottom">
+          <div class="form-group">
+            <label for="cityInput">City</label>
+            <input
+              type="text"
+              class="form-control"
+              id="cityInput"
+              placeholder="Enter city"
+              v-model="city"
+              disabled
+            />
+          </div>
+          <template #content>
+            Fitness Buddies is only available in Ann Arbor, MI at this time
+          </template>
+        </tippy>
         <br />
         <div class="form-group">
           <label for="profilePicInput">Profile Picture</label>
@@ -205,5 +212,3 @@ export default {
     </div>
   </div>
 </template>
-
-<style scoped></style>
