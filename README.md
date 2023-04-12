@@ -3,6 +3,8 @@
 ## Project Description
 fitnessbuddies is a web application built on Vue.JS and Vite. The project utilizes mutliple open-source libraries and everything is detailed in the package.json file. Specifically, this project relies on the Firestore, Authentication, Storage, and hosting features from Firebase. In addition, this project uses bootstrap+popperjs, vue-tippy, and vue-select to build the UI. Finally, this project uses vue-router and vuex to manage application routes and application state. 
 
+The site is hosted at https://fitnessbuddies-b3cd2.web.app/
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
