@@ -12,7 +12,9 @@ export default {
   <br />
   <div class="row">
     <div class="col">
-      <MatchesContainer />
+      <Suspense>
+        <MatchesContainer />
+      </Suspense>
     </div>
     <div class="col">
       <div style="width: 100%; margin-top: 45px">
@@ -31,7 +33,9 @@ export default {
       </div>
     </div>
     <div class="col">
+      <Suspense>
       <RequestsContainer />
+      </Suspense>
     </div>
   </div>
 </template>

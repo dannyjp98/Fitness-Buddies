@@ -18,31 +18,36 @@
 import { db } from "@/firebase";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
-import { onSnapshot, collection } from "firebase/firestore";
+import { onSnapshot, collection, doc, getDoc } from "firebase/firestore";
 import Match from "@/components/matches/Match.vue";
 
 export default {
   name: "RequestsContainer",
   components: { Match },
-  setup() {
+  async setup() {
     const store = useStore();
     const requests = ref([]);
     const isLoading = ref(true);
 
     const user = computed(() => store.getters.user).value.data;
 
+    const userSnap = await getDoc(doc(db, "users", user.uid));
+    const userData = userSnap.data();
+
     const q = collection(db, "users");
     onSnapshot(q, (querySnapshot) => {
       requests.value = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
+        const uid = doc.ref.path.split('/')[1];
         if (
-          data.requests.includes(user.uid) &&
-          !data.resolved.includes(user.uid)
+          user.uid !== uid && // not me
+          userData.requests.includes(uid) && // They have requested me
+          !userData.resolved.includes(uid) // I have not resolved them
         ) {
           requests.value.push({
             name: data.name,
-            uid: doc.ref.path.split("/")[1],
+            uid: uid,
             city: data.city,
             bio: data.bio,
             phone: data.phone,

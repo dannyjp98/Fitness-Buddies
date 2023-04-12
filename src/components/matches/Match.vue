@@ -73,9 +73,9 @@ export default {
       });
     },
     async resolve(ruid) {
-      await updateDoc(doc(db, "users", ruid), {
-        requests: arrayRemove(this.uid),
-        resolved: arrayUnion(this.uid),
+      await updateDoc(doc(db, "users", this.uid), {
+        requests: arrayRemove(ruid),
+        resolved: arrayUnion(ruid),
       });
     },
   },
