@@ -3,9 +3,7 @@
     <div class="container">
       <div class="row d-flex">
         <div class="col">
-          <Suspense>
-            <ProfileImage :uid="match.uid" class="pic" />
-          </Suspense>
+          <ProfileImage :uid="match.uid" class="pic" />
         </div>
         <div class="col d-flex align-items-center justify-content-center">
           <h4>{{ match.name }}</h4>

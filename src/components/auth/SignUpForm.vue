@@ -37,14 +37,10 @@ const register = async () => {
     });
   }
 
-  try {
-    await store.dispatch("register", {
-      email: email.value,
-      password: password.value,
-    });
-  } catch (error) {
-    alert("Password must be at least 6 characters");
-  }
+  await store.dispatch("register", {
+    email: email.value,
+    password: password.value,
+  });
 
   const user = store.getters.user.data;
 

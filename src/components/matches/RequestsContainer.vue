@@ -4,7 +4,7 @@
       Pending Fitness Buddy Requests: <strong>{{ requests.length }}</strong>
     </h2>
     <div class="requestsContainer">
-      <div class="container requests" v-for="match in requests">
+      <div class="container requests" v-for="match in requests" :key="match.uid">
         <Match :uid="user.uid" :match="match" :is-request="true" />
       </div>
     </div>

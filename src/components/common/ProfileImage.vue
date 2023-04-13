@@ -1,5 +1,5 @@
 <template>
-  <img :src="picURL" alt="Profile Picture" />
+  <img :src="picURL" alt="" />
 </template>
 
 <script>

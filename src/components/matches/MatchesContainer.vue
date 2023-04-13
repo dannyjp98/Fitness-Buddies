@@ -4,7 +4,7 @@
       Fitness Buddy Matches: <strong>{{ matches.length }}</strong>
     </h2>
     <div class="matchContainer">
-      <div class="container match" v-for="match in matches">
+      <div class="container match" v-for="match in matches" :key="match.uid">
         <Match :uid="user.uid" :match="match" :is-request="false" />
       </div>
     </div>
@@ -36,6 +36,7 @@ export default {
 
     const q = collection(db, "users");
     onSnapshot(q, (querySnapshot) => {
+      isLoading.value = true;
       matches.value = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
@@ -56,8 +57,8 @@ export default {
             interests: data.interests,
           });
         }
-        isLoading.value = false;
       });
+      isLoading.value = false;
     });
 
     return { user, matches, isLoading };

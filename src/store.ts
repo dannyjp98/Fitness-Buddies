@@ -41,7 +41,7 @@ const store = createStore({
       } catch (e) {
         console.log("register error:");
         console.log(e);
-        throw e;
+        alert(e);
       }
     },
     async login(context, { email, password }) {
