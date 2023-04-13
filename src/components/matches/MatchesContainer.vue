@@ -8,7 +8,12 @@
     </h3>
     <div class="matchContainer">
       <div class="container match" v-for="match in matches" :key="match.uid">
-        <Match :uid="user.uid" :match="match" :is-request="false" v-if="!requestsContainer" />
+        <Match
+          :uid="user.uid"
+          :match="match"
+          :is-request="false"
+          v-if="!requestsContainer"
+        />
         <Match :uid="user.uid" :match="match" :is-request="true" v-else />
       </div>
     </div>
@@ -43,7 +48,8 @@ export default {
     const q = collection(db, "users");
     onSnapshot(q, (querySnapshot) => {
       matches.value = [];
-      if(!props.requestsContainer) { // This is a match container
+      if (!props.requestsContainer) {
+        // This is a match container
         querySnapshot.forEach((doc) => {
           const data = doc.data();
           const uid = doc.ref.path.split("/")[1];
@@ -64,7 +70,8 @@ export default {
             });
           }
         });
-      }else{ // This is a requests container
+      } else {
+        // This is a requests container
         querySnapshot.forEach((doc) => {
           const data = doc.data();
           const uid = doc.ref.path.split("/")[1];
@@ -93,7 +100,8 @@ export default {
 </script>
 
 <style scoped>
-h2, h3{
+h2,
+h3 {
   color: #007bff;
 }
 .match {

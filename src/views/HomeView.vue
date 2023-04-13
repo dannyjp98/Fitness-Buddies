@@ -39,4 +39,9 @@ export default {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+  div.row {
+      margin-left: 5px;
+      margin-right: 5px;
+  }
+</style>

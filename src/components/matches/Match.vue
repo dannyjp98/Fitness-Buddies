@@ -1,5 +1,6 @@
 <template>
   <div class="row-md-2 match">
+    <br>
     <div class="container">
       <div class="row d-flex">
         <div class="col">
@@ -10,22 +11,26 @@
         </div>
       </div>
       <div class="row justify-content-center">{{ match.bio }}</div>
+      <br>
       <div class="row justify-content-center">
         {{ match.phone }}
       </div>
       <br />
-      <div
-        class="row g-5 justify-content-center"
-        v-for="interest in match.interests"
-      >
-        <InterestLabel
-          :interest="interest.interest"
-          :experience="interest.experience"
-          class="label"
-        />
+      <div class="row g-5 justify-content-center">
+        <div
+          class="col-sm-3"
+          v-for="interest in match.interests"
+          :key="interest.interest"
+        >
+          <InterestLabel
+            :interest="interest.interest"
+            :experience="interest.experience"
+            class="label"
+          />
+        </div>
       </div>
       <div class="row justify-content-center" v-if="!isRequest">
-        <button class="btn" @click="connect(match.uid)">Connect</button>
+        <button class="btn btn-primary connect rounded-pill" @click="connect(match.uid)">Connect</button>
       </div>
       <div class="row justify-content-center" v-else>
         <div class="col">
@@ -39,6 +44,7 @@
           </button>
         </div>
       </div>
+      <br>
     </div>
   </div>
 </template>
@@ -94,5 +100,9 @@ export default {
   width: 50px;
   height: 50px;
   border-radius: 30px;
+}
+
+.connect {
+    width: 20%;
 }
 </style>
