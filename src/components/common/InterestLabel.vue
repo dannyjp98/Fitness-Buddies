@@ -1,5 +1,8 @@
 <template>
-  <tippy class="tag" placement="bottom">
+  <tippy
+    class="tag w3-tag w3-padding w3-round-large w3-blue"
+    placement="bottom"
+  >
     {{ interest }}
     <template #content> {{ this.experience }}/10 </template>
   </tippy>
@@ -20,16 +23,11 @@ export default {
 
 <style scoped>
 .tag {
-  border-radius: 0.5rem;
-  font-weight: 700;
+  font-weight: 550;
   background-color: #4eb5ff;
-  margin-bottom: 0.75rem;
   display: inline-block;
   color: white;
   margin-left: 0.5rem;
   margin-right: 1.5rem;
-  width: 100%;
-  height: 3vh;
-  padding-top: 0.8vh;
 }
 </style>

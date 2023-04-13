@@ -9,7 +9,7 @@ const router = createRouter({
     {
       path: "/",
       name: "index",
-      component: IndexView,
+      component: () => import("@/views/IndexView.vue"),
     },
     {
       path: "/home",

@@ -166,6 +166,7 @@ export default {
             id="bioInput"
             placeholder="Enter a short bio"
             v-model="bio"
+            maxlength="150"
             required
           />
         </div>

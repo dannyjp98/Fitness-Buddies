@@ -1,6 +1,6 @@
 <template>
   <div class="row-md-2 match">
-    <br>
+    <br />
     <div class="container">
       <div class="row d-flex">
         <div class="col">
@@ -11,14 +11,14 @@
         </div>
       </div>
       <div class="row justify-content-center">{{ match.bio }}</div>
-      <br>
-      <div class="row justify-content-center">
-        {{ match.phone }}
-      </div>
       <br />
-      <div class="row g-5 justify-content-center">
+      <div class="row justify-content-center" v-if="isRequest">
+        Contact: {{ match.phone }}
+      </div>
+      <br v-if="isRequest" />
+      <div class="row justify-content-center">
         <div
-          class="col-sm-3"
+          class="col"
           v-for="interest in match.interests"
           :key="interest.interest"
         >
@@ -29,8 +29,16 @@
           />
         </div>
       </div>
+      <br />
       <div class="row justify-content-center" v-if="!isRequest">
-        <button class="btn btn-primary connect rounded-pill" @click="connect(match.uid)">Connect</button>
+        <div class="col">
+          <button
+            class="btn btn-primary rounded-pill"
+            @click="connect(match.uid)"
+          >
+            Connect
+          </button>
+        </div>
       </div>
       <div class="row justify-content-center" v-else>
         <div class="col">
@@ -44,7 +52,7 @@
           </button>
         </div>
       </div>
-      <br>
+      <br />
     </div>
   </div>
 </template>
@@ -73,13 +81,13 @@ export default {
   methods: {
     async connect(ruid) {
       await updateDoc(doc(db, "users", ruid), {
-        requests: arrayUnion(this.uid),
+        requests: arrayUnion(this.uid.trim()),
       });
     },
     async resolve(ruid) {
       await updateDoc(doc(db, "users", this.uid), {
-        requests: arrayRemove(ruid),
-        resolved: arrayUnion(ruid),
+        requests: arrayRemove(ruid.trim()),
+        resolved: arrayUnion(ruid.trim()),
       });
     },
   },
@@ -103,6 +111,9 @@ export default {
 }
 
 .connect {
-    width: 20%;
+  width: 20%;
+}
+h4 {
+  font-family: "Roboto Mono", monospace;
 }
 </style>

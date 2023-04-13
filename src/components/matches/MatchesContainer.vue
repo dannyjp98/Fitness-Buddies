@@ -1,10 +1,9 @@
 <template>
   <div v-if="!isLoading">
-    <h3 v-if="!requestsContainer">
-      Fitness Buddy Matches: <strong>{{ matches.length }}</strong>
-    </h3>
-    <h3 v-else>
-      Pending Fitness Buddy Requests <strong>{{ matches.length }}</strong>
+    <h3>
+      <template v-if="!requestsContainer"> Fitness Buddy Matches: </template>
+      <template v-else> Pending Fitness Buddy Requests: </template>
+      <strong>{{ matches.length }}</strong>
     </h3>
     <div class="matchContainer">
       <div class="container match" v-for="match in matches" :key="match.uid">
@@ -71,6 +70,7 @@ export default {
           }
         });
       } else {
+        console.log("trigged");
         // This is a requests container
         querySnapshot.forEach((doc) => {
           const data = doc.data();
@@ -102,6 +102,7 @@ export default {
 <style scoped>
 h2,
 h3 {
+  font-family: "Roboto Mono", monospace;
   color: #007bff;
 }
 .match {
