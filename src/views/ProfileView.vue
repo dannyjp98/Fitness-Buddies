@@ -9,10 +9,11 @@ import { deleteUser } from "firebase/auth";
 import ProfileImage from "@/components/common/ProfileImage.vue";
 import InterestLabel from "@/components/common/InterestLabel.vue";
 import { Tippy } from "vue-tippy";
+import PhoneInput from "@/components/common/PhoneInput.vue";
 
 export default {
   name: "ProfileVue",
-  components: { Tippy, InterestLabel, ProfileImage },
+  components: { PhoneInput, Tippy, InterestLabel, ProfileImage },
   setup() {
     const store = useStore();
     const router = useRouter();
@@ -36,7 +37,7 @@ export default {
     onSnapshot(userRef, (doc) => {
       state.profile = doc.data();
       newName.value = state.profile.name;
-      newPhone.value = state.profile.phone;
+      newPhone.value = state.profile.phone + "";
       newBio.value = state.profile.bio;
       newCity.value = state.profile.city;
       state.profile.interests.map(
@@ -64,8 +65,10 @@ export default {
     };
 
     const deleteProfile = async () => {
-      deleteObject(storageRef(storage, `users/${user.uid}/profile`));
-      deleteDoc(userRef);
+      await Promise.all([
+        deleteObject(storageRef(storage, `users/${user.uid}/profile`)),
+        deleteDoc(userRef),
+      ]);
       await store.dispatch("logout");
       await deleteUser(user);
       await router.push("/");
@@ -124,7 +127,8 @@ export default {
               </div>
               <div class="col align-items-center d-flex flex-column" v-else>
                 <h3>Phone Number</h3>
-                <input class="form-control" type="tel" v-model="newPhone" />
+                <!--                <input class="form-control" type="tel" v-model="newPhone" />-->
+                <PhoneInput class="form-control" v-model="newPhone" />
                 <br />
               </div>
             </div>
