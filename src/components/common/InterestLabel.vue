@@ -1,11 +1,15 @@
 <template>
-  <tippy
+  <div class="tag w3-tag w3-padding w3-round-large w3-blue">
+    {{ interest }}
+    <span class="level"> {{ this.experience }}/10</span>
+  </div>
+  <!-- <tippy
     class="tag w3-tag w3-padding w3-round-large w3-blue"
     placement="bottom"
   >
     {{ interest }}
     <template #content> {{ this.experience }}/10 </template>
-  </tippy>
+  </tippy> -->
 </template>
 
 <script>
@@ -30,4 +34,5 @@ export default {
   margin-left: 0.5rem;
   margin-right: 1.5rem;
 }
+
 </style>

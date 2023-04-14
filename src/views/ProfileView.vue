@@ -100,7 +100,7 @@ export default {
           <div class="container-fluid">
             <div class="row">
               <Suspense>
-                <ProfileImage :uid="user.uid" />
+                <ProfileImage class="pic" :uid="user.uid" />
               </Suspense>
             </div>
             <div class="row">
@@ -166,8 +166,7 @@ export default {
                     disabled
                   />
                   <template #content>
-                    Fitness Buddies is only available in Ann Arbor, MI at this
-                    time
+                    Fitness Buddies is only available in Ann Arbor, MI at this time
                   </template>
                 </tippy>
                 <br />
@@ -261,5 +260,10 @@ img {
 }
 li h5 {
   text-align: center;
+}
+
+.pic {
+  width: 100px;
+  height: 100px;
 }
 </style>

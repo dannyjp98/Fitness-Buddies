@@ -2,7 +2,7 @@
   <div class="row-md-2 match">
     <br />
     <div class="container">
-      <div class="row d-flex">
+      <div class="row d-flex justify-content-center">
         <div class="col">
           <ProfileImage :uid="match.uid" class="pic" />
         </div>
@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="row justify-content-center">{{ match.bio }}</div>
-      <br />
+      <br/>
       <div class="row justify-content-center" v-if="isRequest">
         Contact: {{ match.phone }}
       </div>
@@ -96,7 +96,7 @@ export default {
 
 <style scoped>
 .match {
-  background-color: rgb(205, 204, 204);
+  background-color: rgb(209, 234, 255);
   border-radius: 30px;
   padding: 20px;
   width: 100%;

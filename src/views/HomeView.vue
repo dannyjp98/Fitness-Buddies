@@ -10,13 +10,13 @@ export default {
 <template>
   <br />
   <div class="row">
-    <div class="col">
+    <div class="col-7">
       <Suspense>
         <MatchesContainer :requests-container="false" />
       </Suspense>
     </div>
-    <div class="col">
-      <div style="width: 100%; margin-top: 45px">
+    <!-- <div class="col-5">
+      <div class="map" style="width: 100%; margin-top: 45px">
         <iframe
           width="100%"
           height="600"
@@ -30,7 +30,7 @@ export default {
           ></iframe
         >
       </div>
-    </div>
+    </div> -->
     <div class="col">
       <Suspense>
         <MatchesContainer :requests-container="true" />
@@ -44,4 +44,5 @@ div.row {
   margin-left: 5px;
   margin-right: 5px;
 }
+
 </style>
