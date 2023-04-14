@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import IndexView from "../views/IndexView.vue";
 import { getAuth } from "firebase/auth";
 import store from "@/store";
 

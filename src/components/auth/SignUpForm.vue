@@ -64,6 +64,7 @@ const register = async () => {
 const onUpload = (event) => (profilePic = event.target.files[0]);
 </script>
 <script>
+import PhoneInput from "@/components/common/PhoneInput.vue";
 import vSelect from "vue-select";
 import { Tippy } from "vue-tippy";
 export default {
@@ -71,6 +72,7 @@ export default {
   components: {
     vSelect: vSelect,
     Tippy,
+    PhoneInput,
   },
 };
 </script>
@@ -118,14 +120,7 @@ export default {
         <br />
         <div class="form-group">
           <label for="phoneInput">Phone Number</label>
-          <input
-            type="number"
-            class="form-control"
-            id="phoneInput"
-            placeholder="Enter phone number"
-            v-model="phone"
-            required
-          />
+          <PhoneInput id="phoneInput" class="form-control" v-model="phone" />
         </div>
         <br />
         <tippy placement="bottom">
@@ -182,6 +177,7 @@ export default {
             :selectable="() => selected.length < 3"
           />
         </div>
+        <div>*Level 1 is an absolute beginner, Level 10 is a professional</div>
         <br />
         <div class="form-group" id="experience">
           <div class="container">
@@ -206,10 +202,14 @@ export default {
             </div>
           </div>
         </div>
-        <div>*Level 1 is an absolute beginner, Level 10 is a professional</div>
         <br />
         <button class="btn btn-primary">Sign Up!</button>
       </form>
     </div>
   </div>
 </template>
+
+<style scoped>
+div template:hover {
+}
+</style>
