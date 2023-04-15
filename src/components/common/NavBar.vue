@@ -17,7 +17,7 @@ export default {
 </script>
 <template>
   <nav class="navbar navbar-expand-lg">
-    <img src="public/favicon.ico">
+    <img src="/favicon.ico" alt=""/>
     <RouterLink to="/" class="navbar-brand">Fitness Buddies</RouterLink>
     <button
       class="navbar-toggler"

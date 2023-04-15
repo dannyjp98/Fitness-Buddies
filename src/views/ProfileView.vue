@@ -161,16 +161,20 @@ export default {
               </div>
               <div class="col align-items-center d-flex flex-column" v-else>
                 <h3>Location</h3>
-                <tippy placement="bottom" style="margin: 0; width: 100%">
+                <tippy
+                  placement="bottom"
+                  style="margin: 0; width: 100%"
+                  class="d-flex justify-content-center"
+                >
                   <input
                     class="form-control"
                     type="text"
                     v-model="newCity"
-                    style="margin-left: 70px"
                     disabled
                   />
                   <template #content>
-                    Fitness Buddies is only available in Ann Arbor, MI at this time
+                    Fitness Buddies is only available in Ann Arbor, MI at this
+                    time
                   </template>
                 </tippy>
                 <br />
@@ -252,6 +256,7 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+  width: 50%;
 }
 img {
   display: block;
@@ -267,7 +272,7 @@ li h5 {
 }
 
 .pic {
-  width: 100px;
-  height: 100px;
+  width: 35vw;
+  height: 35vh;
 }
 </style>

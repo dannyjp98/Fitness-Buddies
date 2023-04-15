@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="row justify-content-center">{{ match.bio }}</div>
-      <br/>
+      <br />
       <div class="row justify-content-center" v-if="isRequest">
         Contact: {{ match.phone }}
       </div>
