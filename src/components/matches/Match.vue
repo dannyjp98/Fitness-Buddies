@@ -78,7 +78,7 @@ export default {
     },
     isRequest: Boolean,
     isBuddy: Boolean,
-    isPending: Boolean
+    isPending: Boolean,
   },
   methods: {
     async connect(ruid) {
@@ -86,7 +86,7 @@ export default {
       cbtn.innerText = "Sent Request!";
       cbtn.style.backgroundColor = "#ff0000";
       cbtn.disabled = true;
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       await updateDoc(doc(db, "users", ruid), {
         requests: arrayUnion(this.uid.trim()),
       });

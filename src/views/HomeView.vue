@@ -4,7 +4,7 @@ import SentRequests from "@/components/matches/SentRequests.vue";
 
 export default {
   name: "HomeView",
-  components: { MatchesContainer, SentRequests},
+  components: { MatchesContainer, SentRequests },
 };
 </script>
 

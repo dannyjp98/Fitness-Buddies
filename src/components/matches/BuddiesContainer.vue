@@ -1,7 +1,7 @@
 <template>
   <div v-if="!isLoading">
     <h3>
-      <strong>{{ matches.length}} Fitness Buddies</strong>
+      <strong>{{ matches.length }} Fitness Buddies</strong>
     </h3>
     <div class="matchContainer">
       <div class="container match" v-for="match in matches" :key="match.uid">
@@ -45,33 +45,33 @@ export default {
     onSnapshot(q, (querySnapshot) => {
       matches.value = [];
       console.log("trigged");
-        // This is a requests container
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const uid = doc.ref.path.split("/")[1];
-          if (
-            user.uid !== uid && // not me
-            userData.resolved.includes(uid) // I have not resolved them
-          ) {
-            matches.value.push({
-              name: data.name,
-              uid: uid,
-              city: data.city,
-              bio: data.bio,
-              phone: data.phone,
-              interests: data.interests,
-            });
-          } else if (data.resolved.includes(user.uid)){
-              matches.value.push({
-              name: data.name,
-              uid: uid,
-              city: data.city,
-              bio: data.bio,
-              phone: data.phone,
-              interests: data.interests,
-            });
-          }
-        });
+      // This is a requests container
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const uid = doc.ref.path.split("/")[1];
+        if (
+          user.uid !== uid && // not me
+          userData.resolved.includes(uid) // I have not resolved them
+        ) {
+          matches.value.push({
+            name: data.name,
+            uid: uid,
+            city: data.city,
+            bio: data.bio,
+            phone: data.phone,
+            interests: data.interests,
+          });
+        } else if (data.resolved.includes(user.uid)) {
+          matches.value.push({
+            name: data.name,
+            uid: uid,
+            city: data.city,
+            bio: data.bio,
+            phone: data.phone,
+            interests: data.interests,
+          });
+        }
+      });
       isLoading.value = false;
     });
 

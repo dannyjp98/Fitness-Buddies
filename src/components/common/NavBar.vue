@@ -17,7 +17,7 @@ export default {
 </script>
 <template>
   <nav class="navbar navbar-expand-lg">
-    <img src="/favicon.ico" alt=""/>
+    <img src="/favicon.ico" alt="" />
     <RouterLink to="/" class="navbar-brand">Fitness Buddies</RouterLink>
     <button
       class="navbar-toggler"
@@ -34,7 +34,7 @@ export default {
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto" v-if="user.loggedIn">
         <li class="nav-item active">
-          <RouterLink to="/home" class="nav-link">Find</RouterLink>
+          <RouterLink to="/home" class="nav-link">Matches</RouterLink>
         </li>
         <li class="nav-item">
           <RouterLink to="/buddies" class="nav-link">Buddies</RouterLink>
