@@ -34,7 +34,10 @@ export default {
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto" v-if="user.loggedIn">
         <li class="nav-item active">
-          <RouterLink to="/home" class="nav-link">Home</RouterLink>
+          <RouterLink to="/home" class="nav-link">Find</RouterLink>
+        </li>
+        <li class="nav-item">
+          <RouterLink to="/buddies" class="nav-link">Buddies</RouterLink>
         </li>
         <li class="nav-item">
           <RouterLink to="/profile" class="nav-link">Profile</RouterLink>

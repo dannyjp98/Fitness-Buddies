@@ -272,7 +272,7 @@ li h5 {
 }
 
 .pic {
-  width: 35vw;
+  width: 35vh;
   height: 35vh;
 }
 </style>

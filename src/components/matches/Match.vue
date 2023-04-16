@@ -12,7 +12,7 @@
       </div>
       <div class="row justify-content-center">{{ match.bio }}</div>
       <br />
-      <div class="row justify-content-center" v-if="isRequest">
+      <div class="row justify-content-center" v-if="isRequest && !isPending">
         Contact: {{ match.phone }}
       </div>
       <br v-if="isRequest" />
@@ -33,21 +33,21 @@
       <div class="row justify-content-center" v-if="!isRequest">
         <div class="col">
           <button
-            class="btn btn-primary rounded-pill"
+            class="connectbtn btn btn-primary rounded-pill"
             @click="connect(match.uid)"
           >
             Connect
           </button>
         </div>
       </div>
-      <div class="row justify-content-center" v-else>
+      <div class="row justify-content-center" v-else-if="!isBuddy">
         <div class="col">
-          <button class="btn btn-success" @click="resolve(match.uid)">
+          <button class="btn btn-success" @click="accept(match.uid)">
             Accept
           </button>
         </div>
         <div class="col">
-          <button class="btn btn-danger" @click="resolve(match.uid)">
+          <button class="btn btn-danger" @click="reject(match.uid)">
             Reject
           </button>
         </div>
@@ -77,17 +77,29 @@ export default {
       interests: [Object],
     },
     isRequest: Boolean,
+    isBuddy: Boolean,
+    isPending: Boolean
   },
   methods: {
     async connect(ruid) {
+      let cbtn = document.querySelector(".connectbtn");
+      cbtn.innerText = "Sent Request!";
+      cbtn.style.backgroundColor = "#ff0000";
+      cbtn.disabled = true;
+      await new Promise(resolve => setTimeout(resolve, 1000));
       await updateDoc(doc(db, "users", ruid), {
         requests: arrayUnion(this.uid.trim()),
       });
     },
-    async resolve(ruid) {
+    async accept(ruid) {
       await updateDoc(doc(db, "users", this.uid), {
         requests: arrayRemove(ruid.trim()),
         resolved: arrayUnion(ruid.trim()),
+      });
+    },
+    async reject(ruid) {
+      await updateDoc(doc(db, "users", this.uid), {
+        requests: arrayRemove(ruid.trim()),
       });
     },
   },

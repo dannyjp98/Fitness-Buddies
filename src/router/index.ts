@@ -27,6 +27,14 @@ const router = createRouter({
       },
     },
     {
+      path: "/buddies",
+      name: "buddies",
+      component: () => import("@/views/BuddiesView.vue"),
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
       path: "/logout",
       name: "logout",
       component: {

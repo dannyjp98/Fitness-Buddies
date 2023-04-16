@@ -1,16 +1,16 @@
 <template>
   <div v-if="!isLoading">
     <h3>
-      <template v-if="!requestsContainer"> Fitness Buddy Matches: </template>
-      <template v-else> Incoming Requests: </template>
-      <strong>{{ matches.length }}</strong>
+      <strong>Sent Requests: {{ matches.length }}</strong>
     </h3>
     <div class="matchContainer">
       <div class="container match" v-for="match in matches" :key="match.uid">
         <Match
           :uid="user.uid"
           :match="match"
-          :is-request="false"
+          :is-request="true"
+          :is-buddy="true"
+          :is-pending ="true"
           v-if="!requestsContainer"
         />
         <Match :uid="user.uid" :match="match" :is-request="true" v-else />
@@ -46,51 +46,27 @@ export default {
 
     const q = collection(db, "users");
     onSnapshot(q, (querySnapshot) => {
+      
       matches.value = [];
-      if (!props.requestsContainer) {
-        // This is a match container
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const uid = doc.ref.path.split("/")[1];
-          if (
-            user.uid !== uid && // not me
-            !data.requests.includes(user.uid) && // I have not requested them
-            !userData.requests.includes(uid) && // they havent requested me
-            !data.resolved.includes(user.uid) && // they havent resolved me
-            !userData.resolved.includes(uid) // I havent resolved them
-          ) {
-            matches.value.push({
-              name: data.name,
-              uid: uid,
-              city: data.city,
-              bio: data.bio,
-              phone: data.phone,
-              interests: data.interests,
-            });
-          }
-        });
-      } else {
-        console.log("trigged");
+      
+        console.log("Loading Requests");
         // This is a requests container
         querySnapshot.forEach((doc) => {
           const data = doc.data();
           const uid = doc.ref.path.split("/")[1];
-          if (
-            user.uid !== uid && // not me
-            userData.requests.includes(uid) && // They have requested me
-            !userData.resolved.includes(uid) // I have not resolved them
-          ) {
-            matches.value.push({
-              name: data.name,
-              uid: uid,
-              city: data.city,
-              bio: data.bio,
-              phone: data.phone,
-              interests: data.interests,
-            });
+          console.log(userData.requests);
+          if (data.requests.includes(user.uid)){
+                console.log("FOUND IN REQUESTS");
+                matches.value.push({
+                name: data.name,
+                uid: uid,
+                city: data.city,
+                bio: data.bio,
+                phone: data.phone,
+                interests: data.interests,
+              })
           }
         });
-      }
       isLoading.value = false;
     });
 
@@ -109,6 +85,7 @@ h3 {
   padding: 0;
 }
 .matchContainer {
+  overflow: scroll !important;
   height: 95vh;
 }
 </style>

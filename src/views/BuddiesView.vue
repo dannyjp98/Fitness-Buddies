@@ -1,21 +1,16 @@
 <script>
-import MatchesContainer from "@/components/matches/MatchesContainer.vue";
+import BuddiesContainer from "@/components/matches/BuddiesContainer.vue";
 import SentRequests from "@/components/matches/SentRequests.vue";
 
 export default {
   name: "HomeView",
-  components: { MatchesContainer, SentRequests},
+  components: { BuddiesContainer, SentRequests},
 };
 </script>
 
 <template>
   <br />
   <div class="row">
-    <div class="col-7">
-      <Suspense>
-        <MatchesContainer :requests-container="false" />
-      </Suspense>
-    </div>
     <!--    <div class="col">-->
     <!--      <div class="map" style="width: 100%; margin-top: 45px">-->
     <!--        <iframe-->
@@ -32,9 +27,14 @@ export default {
     <!--        >-->
     <!--      </div>-->
     <!--    </div>-->
+    <div class="col-3">
+      <Suspense>
+        <SentRequests/>
+      </Suspense>
+    </div>
     <div class="col">
       <Suspense>
-        <MatchesContainer :requests-container="true" />
+        <BuddiesContainer/>
       </Suspense>
     </div>
   </div>
