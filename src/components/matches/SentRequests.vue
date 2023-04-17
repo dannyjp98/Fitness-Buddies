@@ -10,7 +10,7 @@
           :match="match"
           :is-request="true"
           :is-buddy="true"
-          :is-pending ="true"
+          :is-pending="true"
           v-if="!requestsContainer"
         />
         <Match :uid="user.uid" :match="match" :is-request="true" v-else />
@@ -46,27 +46,26 @@ export default {
 
     const q = collection(db, "users");
     onSnapshot(q, (querySnapshot) => {
-      
       matches.value = [];
-      
-        console.log("Loading Requests");
-        // This is a requests container
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          const uid = doc.ref.path.split("/")[1];
-          console.log(userData.requests);
-          if (data.requests.includes(user.uid)){
-                console.log("FOUND IN REQUESTS");
-                matches.value.push({
-                name: data.name,
-                uid: uid,
-                city: data.city,
-                bio: data.bio,
-                phone: data.phone,
-                interests: data.interests,
-              })
-          }
-        });
+
+      console.log("Loading Requests");
+      // This is a requests container
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const uid = doc.ref.path.split("/")[1];
+        console.log(userData.requests);
+        if (data.requests.includes(user.uid)) {
+          console.log("FOUND IN REQUESTS");
+          matches.value.push({
+            name: data.name,
+            uid: uid,
+            city: data.city,
+            bio: data.bio,
+            phone: data.phone,
+            interests: data.interests,
+          });
+        }
+      });
       isLoading.value = false;
     });
 

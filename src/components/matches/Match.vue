@@ -78,7 +78,7 @@ export default {
     },
     isRequest: Boolean,
     isBuddy: Boolean,
-    isPending: Boolean
+    isPending: Boolean,
   },
   methods: {
     reloadPage() {

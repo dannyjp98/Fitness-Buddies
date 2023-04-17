@@ -4,7 +4,7 @@ import SentRequests from "@/components/matches/SentRequests.vue";
 
 export default {
   name: "HomeView",
-  components: { BuddiesContainer, SentRequests},
+  components: { BuddiesContainer, SentRequests },
 };
 </script>
 
@@ -29,12 +29,12 @@ export default {
     <!--    </div>-->
     <div class="col-3">
       <Suspense>
-        <SentRequests/>
+        <SentRequests />
       </Suspense>
     </div>
     <div class="col">
       <Suspense>
-        <BuddiesContainer/>
+        <BuddiesContainer />
       </Suspense>
     </div>
   </div>
