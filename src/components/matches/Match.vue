@@ -59,7 +59,7 @@
 
 <script>
 import { db } from "@/firebase";
-import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove, setDoc } from "firebase/firestore";
 import InterestLabel from "@/components/common/InterestLabel.vue";
 import ProfileImage from "@/components/common/ProfileImage.vue";
 
@@ -81,12 +81,15 @@ export default {
     isPending: Boolean
   },
   methods: {
+    reloadPage() {
+      window.location.reload();
+    },
     async connect(ruid) {
-      let cbtn = document.querySelector(".connectbtn");
-      cbtn.innerText = "Sent Request!";
-      cbtn.style.backgroundColor = "#ff0000";
-      cbtn.disabled = true;
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // let cbtn = document.querySelector(".connectbtn");
+      // cbtn.innerText = "Sent Request!";
+      // cbtn.style.backgroundColor = "#ff0000";
+      // cbtn.disabled = true;
+      // await new Promise(resolve => setTimeout(resolve, 1000));
       await updateDoc(doc(db, "users", ruid), {
         requests: arrayUnion(this.uid.trim()),
       });
@@ -95,12 +98,15 @@ export default {
       await updateDoc(doc(db, "users", this.uid), {
         requests: arrayRemove(ruid.trim()),
         resolved: arrayUnion(ruid.trim()),
+        
       });
+      window.location.reload();
     },
     async reject(ruid) {
       await updateDoc(doc(db, "users", this.uid), {
         requests: arrayRemove(ruid.trim()),
       });
+      window.location.reload();
     },
   },
 };

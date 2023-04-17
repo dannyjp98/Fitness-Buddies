@@ -11,9 +11,10 @@
           :uid="user.uid"
           :match="match"
           :is-request="false"
+          :is-pending ="true"
           v-if="!requestsContainer"
         />
-        <Match :uid="user.uid" :match="match" :is-request="true" v-else />
+        <Match :uid="user.uid" :match="match" :is-request="true" :is-pending ="true" v-else />
       </div>
     </div>
   </div>
@@ -69,16 +70,16 @@ export default {
             });
           }
         });
-      } else {
-        console.log("trigged");
+      }
+      if(props.requestsContainer) {
         // This is a requests container
         querySnapshot.forEach((doc) => {
           const data = doc.data();
           const uid = doc.ref.path.split("/")[1];
           if (
-            user.uid !== uid && // not me
-            userData.requests.includes(uid) && // They have requested me
-            !userData.resolved.includes(uid) // I have not resolved them
+              user.uid !== uid && // not me
+              userData.requests.includes(uid)  // They have requested me
+            // !userData.resolved.includes(uid) // I have not resolved them
           ) {
             matches.value.push({
               name: data.name,

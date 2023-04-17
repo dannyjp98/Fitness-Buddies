@@ -1,10 +1,9 @@
 <script>
 import MatchesContainer from "@/components/matches/MatchesContainer.vue";
-import SentRequests from "@/components/matches/SentRequests.vue";
 
 export default {
   name: "HomeView",
-  components: { MatchesContainer, SentRequests},
+  components: { MatchesContainer},
 };
 </script>
 
