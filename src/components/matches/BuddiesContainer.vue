@@ -28,7 +28,7 @@ import { onSnapshot, collection, getDoc, doc } from "firebase/firestore";
 import Match from "@/components/matches/Match.vue";
 
 export default {
-  name: "MatchesContainer",
+  name: "BuddiesContainer",
   components: { Match },
   props: {},
   async setup(props) {

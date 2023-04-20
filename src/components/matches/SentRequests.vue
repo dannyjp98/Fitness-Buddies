@@ -8,18 +8,15 @@
         <Match
           :uid="user.uid"
           :match="match"
-          :is-request="true"
+          :is-request="false"
           :is-buddy="true"
           :is-pending="true"
-          v-if="!requestsContainer"
         />
-        <Match :uid="user.uid" :match="match" :is-request="true" v-else />
       </div>
     </div>
   </div>
   <div v-else>
-    <h2 v-if="!requestsContainer">Loading Matches...</h2>
-    <h2 v-else>Loading Requests...</h2>
+    <h2>Loading Requests...</h2>
   </div>
 </template>
 
@@ -31,31 +28,24 @@ import { onSnapshot, collection, getDoc, doc } from "firebase/firestore";
 import Match from "@/components/matches/Match.vue";
 
 export default {
-  name: "MatchesContainer",
+  name: "SentContainer",
   components: { Match },
-  props: { requestsContainer: Boolean },
-  async setup(props) {
+  async setup() {
     const store = useStore();
     const matches = ref([]);
     const isLoading = ref(true);
 
     const user = computed(() => store.getters.user).value.data;
 
-    const userSnap = await getDoc(doc(db, "users", user.uid));
-    const userData = userSnap.data();
-
     const q = collection(db, "users");
     onSnapshot(q, (querySnapshot) => {
       matches.value = [];
 
-      console.log("Loading Requests");
       // This is a requests container
       querySnapshot.forEach((doc) => {
         const data = doc.data();
         const uid = doc.ref.path.split("/")[1];
-        console.log(userData.requests);
-        if (data.requests.includes(user.uid)) {
-          console.log("FOUND IN REQUESTS");
+        if (uid !== user.uid && data.requests.includes(user.uid)) {
           matches.value.push({
             name: data.name,
             uid: uid,

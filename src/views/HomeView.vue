@@ -3,7 +3,7 @@ import MatchesContainer from "@/components/matches/MatchesContainer.vue";
 
 export default {
   name: "HomeView",
-  components: { MatchesContainer},
+  components: { MatchesContainer },
 };
 </script>
 

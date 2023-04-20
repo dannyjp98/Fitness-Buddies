@@ -16,26 +16,32 @@
         Contact: {{ match.phone }}
       </div>
       <br v-if="isRequest" />
-      <div class="row justify-content-center">
-        <div
-          class="col"
-          v-for="interest in match.interests"
-          :key="interest.interest"
-        >
-          <InterestLabel
-            :interest="interest.interest"
-            :experience="interest.experience"
-            class="label"
-          />
+      <div class="container overflow-auto">
+        <div class="row justify-content-center gy-1 labels">
+          <div
+            class="col"
+            v-for="interest in match.interests"
+            :key="interest.interest"
+          >
+            <InterestLabel
+              :interest="interest.interest"
+              :experience="interest.experience"
+              class="label"
+            />
+          </div>
         </div>
       </div>
       <br />
-      <div class="row justify-content-center" v-if="!isRequest">
+      <div class="row justify-content-center" v-if="isPending">
         <div class="col">
-          <button
-            class="connectbtn btn btn-primary rounded-pill"
-            @click="connect(match.uid)"
-          >
+          <button class="btn btn-danger" @click="retract(match.uid)">
+            Retract Request
+          </button>
+        </div>
+      </div>
+      <div class="row justify-content-center" v-else-if="!isRequest">
+        <div class="col">
+          <button class="btn btn-primary" @click="connect(match.uid)">
             Connect
           </button>
         </div>
@@ -59,7 +65,13 @@
 
 <script>
 import { db } from "@/firebase";
-import { doc, updateDoc, arrayUnion, arrayRemove, setDoc } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+  setDoc,
+} from "firebase/firestore";
 import InterestLabel from "@/components/common/InterestLabel.vue";
 import ProfileImage from "@/components/common/ProfileImage.vue";
 
@@ -81,15 +93,7 @@ export default {
     isPending: Boolean,
   },
   methods: {
-    reloadPage() {
-      window.location.reload();
-    },
     async connect(ruid) {
-      // let cbtn = document.querySelector(".connectbtn");
-      // cbtn.innerText = "Sent Request!";
-      // cbtn.style.backgroundColor = "#ff0000";
-      // cbtn.disabled = true;
-      // await new Promise(resolve => setTimeout(resolve, 1000));
       await updateDoc(doc(db, "users", ruid), {
         requests: arrayUnion(this.uid.trim()),
       });
@@ -98,15 +102,17 @@ export default {
       await updateDoc(doc(db, "users", this.uid), {
         requests: arrayRemove(ruid.trim()),
         resolved: arrayUnion(ruid.trim()),
-        
       });
-      window.location.reload();
     },
     async reject(ruid) {
       await updateDoc(doc(db, "users", this.uid), {
         requests: arrayRemove(ruid.trim()),
       });
-      window.location.reload();
+    },
+    async retract(ruid) {
+      await updateDoc(doc(db, "users", ruid), {
+        requests: arrayRemove(this.uid),
+      });
     },
   },
 };
@@ -128,10 +134,11 @@ export default {
   border-radius: 30px;
 }
 
-.connect {
-  width: 20%;
-}
 h4 {
   font-family: "Roboto Mono", monospace;
+}
+
+.labels{
+  padding: 0 10px 0 10px;
 }
 </style>
